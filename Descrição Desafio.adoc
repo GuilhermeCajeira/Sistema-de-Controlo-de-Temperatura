@@ -1,0 +1,45 @@
+# Ubiwhere Embedded Systems - Exercício Técnico
+
+
+# _Sistema de Controlo de Temperatura_
+
+
+## Objectivos
+• Desenvolver um algoritmo de controlo de temperatura a ser colocado numa divisão de um edifício.
+O sistema será composto por sensores de temperatura, um dispositivo de regulação de temperatura
+ambiente (ar condicionado) e um algoritmo de controlo a ser desenvolvido.
+• O algoritmo deverá consumir as leituras dos sensores simulados e actuar sobre o dispositivo de regulação
+do sistema com base nessas informações.
+• O exercício deve ser entregue via e-mail com link para um repositório de código que tenha sido
+utilizado para o efeito. Desta maneira será possível ter uma ideia mais concisa dos passos tomados,
+da organização do código e ainda a qualidade da documentação que seja realizada. Com todos os
+materiais e informações aí facultadas, deve ser possível correr a solução durante a revisão.
+
+
+### 1. Análise de Sistema e Arquitectura
+Representação dos requisitos do sistema recorrendo a diagramas funcionais, que sejam claros quanto a
+todas as decisões técnicas envolvidas. Devem ser identificados os principais blocos, as suas funcionalidades,
+todas as entradas/saídas dos mesmos e ainda a forma como comunicam.
+
+
+### 2. Simulação dos Sensores de Temperatura
+Um bom ponto de partida, será a criação de simuladores de sensores de temperatura e de um dispositivo
+de regulação. Os dados gerados devem ser realistas o suficiente para testar diferentes cenários
+do algoritmo a desenvolver posteriormente. A linguagem utilizada deverá ser uma das seguintes (a
+manter no restante desenvolvimento):
+
+• C/C++
+• Rust
+• Python
+• Golang
+
+
+### 3. Desenvolvimento do Algoritmo
+Deve ser escrito um algoritmo de controlo da temperatura conforme o diagrama apresentado no ponto
+1. O algoritmo deve consumir os dados dos sensores desenvolvidos no ponto 2. e com base nos mesmos
+tomar decisões de modo a actuar no regulador.
+
+Deve ser possível informar o algoritmo da temperatura desejada, podendo assim observar-se que a
+mesma é atingida tendo em conta as métricas reportadas pelos simuladores.
+
+
