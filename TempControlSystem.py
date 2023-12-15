@@ -11,53 +11,46 @@ class TemperatureSensor:
         self.current_temperature += variation
         return self.current_temperature
 
-class PIDController:
+class TemperatureController:
     def __init__(self, desired_temperature):
         self.desired_temperature = desired_temperature  # Temperatura desejada
         self.target_temperature_range = 1.0  # Faixa de temperatura permitida
-
-        # Valores de PID configurados no código
-        self.kp = 1.0  # Ganho proporcional
-        self.ki = 0.1  # Ganho integral
-        self.kd = 0.01  # Ganho derivativo
-
-        self.prev_error = 0.0
-        self.integral = 0.0
-
-        self.output_limit = 5.0  # Limita a mudança máxima de saída
+        self.air_conditioner_active = False
+        self.heater_active = False
 
     def adjust_temperature(self, current_temperature):
-        error = self.desired_temperature - current_temperature
+        temperature_difference = current_temperature - self.desired_temperature
 
-        # Termo proporcional
-        proportional = self.kp * error
-
-        # Termo integral
-        self.integral += self.ki * error
-
-        # Termo derivativo
-        derivative = self.kd * (error - self.prev_error)
-
-        # Saída PID
-        output = proportional + self.integral + derivative
-
-        # Limita a mudança de saída para evitar mudanças súbitas
-        output = max(-self.output_limit, min(output, self.output_limit))
-
-        # Atualiza o erro anterior para a próxima iteração
-        self.prev_error = error
-
-        # Aplica a saída do controle
-        self.apply_output(output)
-
-    def apply_output(self, output):
-        # Implementa a ação a ser tomada com base na saída do PID
-        if output > 0:
-            print(f"Heater activated with power: {output:.2f}")
-        elif output < 0:
-            print(f"Air conditioner activated with power: {-output:.2f}")
+        if abs(temperature_difference) > self.target_temperature_range:
+            if temperature_difference > 0:
+                self.activate_air_conditioner()
+                self.deactivate_heater()
+            else:
+                self.activate_heater()
+                self.deactivate_air_conditioner()
         else:
-            print("Heater and Air conditioner deactivated")
+            self.deactivate_air_conditioner()
+            self.deactivate_heater()
+
+    def activate_air_conditioner(self):
+        if not self.air_conditioner_active:
+            print("Air conditioner activated")
+            self.air_conditioner_active = True
+
+    def deactivate_air_conditioner(self):
+        if self.air_conditioner_active:
+            print("Air conditioner deactivated")
+            self.air_conditioner_active = False
+
+    def activate_heater(self):
+        if not self.heater_active:
+            print("Heater activated")
+            self.heater_active = True
+
+    def deactivate_heater(self):
+        if self.heater_active:
+            print("Heater deactivated")
+            self.heater_active = False
 
 def print_menu():
     print("\n=== Temperature Control System ===")
@@ -70,9 +63,9 @@ def choose_temperature(controller):
     print(f"Desired temperature set to {temperature}°C")
 
 if __name__ == "__main__":
-    initial_desired_temperature = float(input("Enter initial desired temperature: "))
     temperature_sensor = TemperatureSensor()
-    pid_controller = PIDController(initial_desired_temperature)
+    desired_temperature = float(input("Enter initial desired temperature: "))
+    hvac_controller = TemperatureController(desired_temperature)
 
     try:
         while True:
@@ -80,7 +73,7 @@ if __name__ == "__main__":
             choice = input("Enter your choice: ")
 
             if choice == "1":
-                choose_temperature(pid_controller)
+                choose_temperature(hvac_controller)
             elif choice == "0":
                 print("Exiting the program.")
                 break
@@ -91,7 +84,7 @@ if __name__ == "__main__":
                 current_temperature = temperature_sensor.read_temperature()
                 print(f"Current temperature: {current_temperature:.2f}°C")
 
-                pid_controller.adjust_temperature(current_temperature)
+                hvac_controller.adjust_temperature(current_temperature)
 
                 time.sleep(1)  # Intervalo de leitura do sensor
 
