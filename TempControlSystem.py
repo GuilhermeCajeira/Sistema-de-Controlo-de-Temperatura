@@ -11,7 +11,7 @@ class TemperatureSensor:
         self.current_temperature += self.temperature_variation
 
         # Simula uma leitura real do sensor
-        variation = random.uniform(-0.5, 0.5)
+        variation = random.uniform(-0.1, 0.1)
         self.current_temperature += variation
 
         return self.current_temperature
@@ -82,16 +82,19 @@ class TemperatureController:
         self.pid_controller.setpoint = new_target
 
     def auto_regulate_temperature(self):
-        self.heating = False
-        self.cooling = False
+        # self.heating = False
+        # self.cooling = False
+        self.controller_active = False
 
     def heat_room(self):
-        self.heating = True
-        self.cooling = False
+        # self.heating = True
+        # self.cooling = False
+        self.controller_active = False
 
     def cool_room(self):
-        self.heating = False
-        self.cooling = True
+        # self.heating = False
+        # self.cooling = True
+        self.controller_active = False
 
 
 

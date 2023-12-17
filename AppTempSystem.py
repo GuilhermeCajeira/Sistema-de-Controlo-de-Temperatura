@@ -112,10 +112,15 @@ class TemperatureControlApp(QWidget):
 
 
 
-if __name__ == '__main__':
+def main():
     app = QApplication(sys.argv)
     window = TemperatureControlApp()
     window.setWindowTitle("Temperature Control System")
     window.setGeometry(100, 100, 500, 300)
     window.show()
     sys.exit(app.exec_())
+
+
+
+if __name__ == "__main__":
+    main()
