@@ -7,17 +7,119 @@ from TempControlSystem import *
 from PrintSystem import *
 
 
+class ConfigDialog(QDialog):
+    def __init__(self, parent=None):
+        super(ConfigDialog, self).__init__(parent)
+        self.setWindowTitle("Configuration Menu")
+        self.setGeometry(200, 200, 400, 200)
+
+        self.setup_config_menu()
+
+    def setup_config_menu(self):
+        layout = QVBoxLayout()
+
+        # Exterior Temperature
+        group_exterior_temp = QGroupBox("Exterior Temperature")
+        layout_exterior_temp = QFormLayout()
+        self.combo_ext_temp = QComboBox()
+        self.combo_ext_temp.addItems(["Cold", "Mild", "Hot"])
+        layout_exterior_temp.addRow(self.combo_ext_temp)
+        group_exterior_temp.setLayout(layout_exterior_temp)
+
+        # Time of Day
+        group_time_of_day = QGroupBox("Time of Day")
+        layout_time_of_day = QFormLayout()
+        self.combo_morning = QComboBox()
+        self.combo_morning.addItems(["Morning", "Afternoon", "Night"])
+        layout_time_of_day.addRow(self.combo_morning)
+        group_time_of_day.setLayout(layout_time_of_day)
+
+        # Room Division
+        group_room_division = QGroupBox("Room Division")
+        layout_room_division = QFormLayout()
+        self.combo_division = QComboBox()
+        self.combo_division.addItems(["Bedroom", "Living Room", "Office", "Amphitheater"])
+        layout_room_division.addRow(self.combo_division)
+        group_room_division.setLayout(layout_room_division)
+
+        # Buttons
+        button_ok = QPushButton("OK")
+        button_ok.clicked.connect(self.accept)
+        button_cancel = QPushButton("Cancel")
+        button_cancel.clicked.connect(self.reject)
+
+        # Add widgets to layout
+        layout.addWidget(group_exterior_temp)
+        layout.addWidget(group_time_of_day)
+        layout.addWidget(group_room_division)
+        layout.addWidget(button_ok)
+        layout.addWidget(button_cancel)
+
+        self.setLayout(layout)
+
+
 class TemperatureControlApp(QWidget):
     def __init__(self):
         # Initializes the main application window
         super(TemperatureControlApp, self).__init__()
 
+        # Set background color to light blue
+        self.setStyleSheet("background-color: lightblue;")
+
         # Initializes temperature sensor and controller
         self.temp_sensor = TemperatureSensor()
         self.temp_controller = TemperatureController(self.temp_sensor)
 
+        # Show the configuration dialog
+        self.configure_environment()
+
         # Setup the application window with menu
         self.setup_app()
+
+    
+    def configure_environment(self):
+        # Create and show the configuration dialog
+        config_dialog = ConfigDialog(self)
+        result = config_dialog.exec_()
+
+        # Apply configuration based on user choices
+        if result == QDialog.Accepted:
+            exterior_temp = config_dialog.combo_ext_temp.currentText()
+
+            time_of_day = config_dialog.combo_morning.currentText()
+
+            room_division = config_dialog.combo_division.currentText()
+
+            
+            # Set initial temperature based on exterior temperature
+            if exterior_temp == "Cold":
+                self.temp_sensor.current_temperature = 28.0
+            elif exterior_temp == "Mild":
+                self.temp_sensor.current_temperature = 22.0
+            elif exterior_temp == "Hot":
+                self.temp_sensor.current_temperature = 17.0
+
+            if time_of_day == "Morning":
+                self.temp_sensor.current_temperature += 2.0
+            elif time_of_day == "Afternoon":
+                self.temp_sensor.current_temperature += 0.0
+            elif time_of_day == "Night":
+                self.temp_sensor.current_temperature -= 2.0
+
+            if room_division == "Bedroom":
+                self.temp_sensor.current_temperature -= 1.0
+            elif room_division == "Living Room":
+                self.temp_sensor.current_temperature += 1.0
+            elif room_division == "Office":
+                self.temp_sensor.current_temperature += 0.0
+            elif room_division == "Amphitheater":
+                self.temp_sensor.current_temperature -= 2.0
+
+            print_configEnvironment(exterior_temp, time_of_day, room_division, self.temp_sensor.current_temperature)
+        else:
+            # User pressed "Cancel," close the application
+            sys.exit()
+        
 
     def setup_app(self):
         # Initializes the main layout and components
@@ -77,9 +179,6 @@ class TemperatureControlApp(QWidget):
         self.timer.timeout.connect(self.update_temperature_display)
         self.timer.start(1000)  # 1000 milliseconds = 1 second
 
-        # Set background color to light blue
-        self.setStyleSheet("background-color: lightblue;")
-
 
     def update_temperature_display(self):
         # Updates the temperature display in the main window
@@ -136,10 +235,9 @@ class TemperatureControlApp(QWidget):
             print(Style.BRIGHT + Fore.LIGHTRED_EX + "===    Choose a temperature first!   ===" + Style.RESET_ALL)
 
 
-
 def main():
     # Main function to run the application
-    app = QApplication(sys.argv)
+    app = QApplication([])
     window = TemperatureControlApp()
     window.setWindowTitle("Temperature Control System")
     window.setGeometry(200, 200, 500, 250)

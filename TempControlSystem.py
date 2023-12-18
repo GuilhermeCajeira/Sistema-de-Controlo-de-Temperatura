@@ -5,7 +5,7 @@ from PrintSystem import *
 class TemperatureSensor:
     def __init__(self):
          # Initializes temperature sensor with an initial temperature and no variation
-        self.current_temperature = 22
+        self.current_temperature = None
         self.temperature_variation = 0
 
     def read_temperature(self):
