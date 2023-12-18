@@ -6,9 +6,14 @@ import sys
 from TempControlSystem import *
 from PrintSystem import *
 
-
 class ConfigDialog(QDialog):
     def __init__(self, parent=None):
+        """
+        Initializes the configuration dialog window.
+
+        Args:
+            parent (QWidget, optional): The parent widget. Defaults to None.
+        """
         super(ConfigDialog, self).__init__(parent)
         self.setWindowTitle("Configuration Menu")
         self.setGeometry(200, 200, 400, 200)
@@ -16,6 +21,9 @@ class ConfigDialog(QDialog):
         self.setup_config_menu()
 
     def setup_config_menu(self):
+        """
+        Sets up the configuration menu layout.
+        """
         layout = QVBoxLayout()
 
         # Exterior Temperature
@@ -60,7 +68,9 @@ class ConfigDialog(QDialog):
 
 class TemperatureControlApp(QWidget):
     def __init__(self):
-        # Initializes the main application window
+        """
+        Initializes the main application window.
+        """
         super(TemperatureControlApp, self).__init__()
 
         # Set background color to light blue
@@ -78,6 +88,9 @@ class TemperatureControlApp(QWidget):
 
     
     def configure_environment(self):
+        """
+        Configures the environment based on user choices in the configuration dialog.
+        """
         # Create and show the configuration dialog
         config_dialog = ConfigDialog(self)
         result = config_dialog.exec_()
@@ -85,19 +98,16 @@ class TemperatureControlApp(QWidget):
         # Apply configuration based on user choices
         if result == QDialog.Accepted:
             exterior_temp = config_dialog.combo_ext_temp.currentText()
-
             time_of_day = config_dialog.combo_morning.currentText()
-
             room_division = config_dialog.combo_division.currentText()
-
             
             # Set initial temperature based on exterior temperature
             if exterior_temp == "Cold":
-                self.temp_sensor.current_temperature = 28.0
+                self.temp_sensor.current_temperature = 17.0
             elif exterior_temp == "Mild":
                 self.temp_sensor.current_temperature = 22.0
             elif exterior_temp == "Hot":
-                self.temp_sensor.current_temperature = 17.0
+                self.temp_sensor.current_temperature = 28.0
 
             if time_of_day == "Morning":
                 self.temp_sensor.current_temperature += 2.0
@@ -107,13 +117,13 @@ class TemperatureControlApp(QWidget):
                 self.temp_sensor.current_temperature -= 2.0
 
             if room_division == "Bedroom":
-                self.temp_sensor.current_temperature -= 1.0
-            elif room_division == "Living Room":
                 self.temp_sensor.current_temperature += 1.0
+            elif room_division == "Living Room":
+                self.temp_sensor.current_temperature -= 1.0
             elif room_division == "Office":
                 self.temp_sensor.current_temperature += 0.0
             elif room_division == "Amphitheater":
-                self.temp_sensor.current_temperature -= 2.0
+                self.temp_sensor.current_temperature += 2.0
 
             print_configEnvironment(exterior_temp, time_of_day, room_division, self.temp_sensor.current_temperature)
         else:
@@ -122,7 +132,9 @@ class TemperatureControlApp(QWidget):
         
 
     def setup_app(self):
-        # Initializes the main layout and components
+        """
+        Sets up the main application window layout and components.
+        """
         main_layout = QVBoxLayout()
 
         # Group Box 1 - Display
@@ -181,13 +193,17 @@ class TemperatureControlApp(QWidget):
 
 
     def update_temperature_display(self):
-        # Updates the temperature display in the main window
+        """
+        Updates the temperature display in the main window.
+        """
         self.temp_controller.update_temperature()
         self.label_temperature.setText(f"Current Temperature: {self.temp_sensor.current_temperature:.2f}°C")
 
 
     def choose_temperature(self):
-        # Allows the user to choose a desired temperature
+        """
+        Allows the user to choose a desired temperature.
+        """
         self.min_temp = 16  # Minimum allowed temperature
         self.max_temp = 32  # Maximum allowed temperature
 
@@ -201,7 +217,9 @@ class TemperatureControlApp(QWidget):
 
 
     def auto_regulate_temperature(self):
-        # Activates auto-regulation mode
+        """
+        Activates the auto-regulation mode.
+        """
         temperature = 23.0      # Ideal temperature
         self.temp_controller.activate_controller(temperature)
 
@@ -210,7 +228,9 @@ class TemperatureControlApp(QWidget):
 
 
     def heat_room(self):
-        # Increases the desired temperature by 1°C
+        """
+        Increases the desired temperature by 1°C.
+        """
         if self.temp_controller.desired_temperature is not None:
             self.temp_controller.desired_temperature += 1.0
             temperature = self.temp_controller.desired_temperature
@@ -223,7 +243,9 @@ class TemperatureControlApp(QWidget):
 
 
     def cool_room(self):
-        # Decreases the desired temperature by 1°C
+        """
+        Decreases the desired temperature by 1°C.
+        """
         if self.temp_controller.desired_temperature is not None:
             self.temp_controller.desired_temperature -= 1.0
             temperature = self.temp_controller.desired_temperature
@@ -236,7 +258,9 @@ class TemperatureControlApp(QWidget):
 
 
 def main():
-    # Main function to run the application
+    """
+    Main function to run the application.
+    """
     app = QApplication([])
     window = TemperatureControlApp()
     window.setWindowTitle("Temperature Control System")

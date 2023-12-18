@@ -11,9 +11,11 @@ def print_configEnvironment(exterior_temp, time_of_day, room_division, desired_t
         time_of_day = "  Night  "
 
     if room_division == "Bedroom":
-        room_division = "  Bedroom  "
+        room_division = "  Bedroom   "
+    elif room_division == "Living Room":
+        room_division = "Living Room "
     elif room_division == "Office":
-        room_division = "  Office   "
+        room_division = "  Office    "
 
     # Prints the configuration of the environment
     print(Style.BRIGHT + Fore.LIGHTYELLOW_EX + "_____________________________________" + Style.RESET_ALL)
@@ -23,7 +25,7 @@ def print_configEnvironment(exterior_temp, time_of_day, room_division, desired_t
     print(Style.BRIGHT + Fore.WHITE + "|-           Time of Day:          -| " + Style.RESET_ALL)
     print(Style.BRIGHT + Fore.LIGHTGREEN_EX + f"|             {time_of_day}             |" + Style.RESET_ALL)
     print(Style.BRIGHT + Fore.WHITE + "|-         Room Division:          -| " + Style.RESET_ALL)
-    print(Style.BRIGHT + Fore.LIGHTMAGENTA_EX + f"|            {room_division}            |" + Style.RESET_ALL)
+    print(Style.BRIGHT + Fore.LIGHTMAGENTA_EX + f"|            {room_division}           |" + Style.RESET_ALL)
     print(Style.BRIGHT + Fore.LIGHTYELLOW_EX + "|___________________________________|" + Style.RESET_ALL)
     print('\n')   
 
