@@ -1,0 +1,122 @@
+Simula um sistema composto por um sensor de temperatura, um dispositivo de regulação de temperatura ambiente (ar condicionado) e um algoritmo de controlo, incluido num cenário configurado pelo utilizador.\hypertarget{md_README_autotoc_md1}{}\doxysection{🔧 Pré-\/requisitos de Instalação}\label{md_README_autotoc_md1}
+Antes de executar o programa, certificar a seguinte biblioteca instalada\+:
+
+
+\begin{DoxyItemize}
+\item \#\#\#\# Py\+Qt5\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pip install PyQt5}
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md2}{}\doxysection{⚙️ Instruções de Execução}\label{md_README_autotoc_md2}
+Começar por correr o código principal com o seguinte comando\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3 AppTempSystem.py}
+\end{DoxyCode}
+
+
+Este comando permite iniciar o sistema de controlo de temperatura. \hypertarget{md_README_autotoc_md3}{}\doxysection{📦 Funcionalidades}\label{md_README_autotoc_md3}
+Após executar o código, antes de iniciar o sistema de regulação de temperatura, é pedido ao utilizador para configurar o ambiente da divisão onde este será colocado.
+
+O menu de configuração, consoante o ambiente escolhido, configura a temperatura inicial do dispositivo de regulação de temperatura, simulando a temperatura inicial que está nessa divisão.
+
+Após essa configuração, o sistema inicia. A cada segundo é atualizado o valor medido pelo sensor de temperatura e apresentado no display ({\bfseries{Current Temperature}}), bem como o modo de operação escolhido ({\bfseries{Operation Mode}})\hypertarget{md_README_autotoc_md4}{}\doxysubsection{Configuration Menu}\label{md_README_autotoc_md4}
+\hypertarget{md_README_autotoc_md5}{}\doxysubsubsection{Exterior Temperature\+:}\label{md_README_autotoc_md5}
+
+\begin{DoxyItemize}
+\item $\ast$$\ast$\char`\"{}\+Cold\char`\"{}$\ast$$\ast$ (Temperatura inicial do dispositivo = 17°C)
+\item $\ast$$\ast$\char`\"{}\+Mean\char`\"{}$\ast$$\ast$ (Temperatura inicial do dispositivo = 22°C)
+\item $\ast$$\ast$\char`\"{}\+Hot\char`\"{}$\ast$$\ast$ (Temperatura inicial do dispositivo = 28°C)
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md6}{}\doxysubsubsection{Time of Day\+:}\label{md_README_autotoc_md6}
+
+\begin{DoxyItemize}
+\item $\ast$$\ast$\char`\"{}\+Morning\char`\"{}$\ast$$\ast$ (Temperatura inicial do dispositivo += 2°C)
+\item $\ast$$\ast$\char`\"{}\+Afternoon\char`\"{}$\ast$$\ast$ (Temperatura inicial do dispositivo += 0°C)
+\item $\ast$$\ast$\char`\"{}\+Night\char`\"{}$\ast$$\ast$ (Temperatura inicial do dispositivo -\/= 2°C)
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md7}{}\doxysubsubsection{Room Division\+:}\label{md_README_autotoc_md7}
+
+\begin{DoxyItemize}
+\item $\ast$$\ast$\char`\"{}\+Bedroom\char`\"{}$\ast$$\ast$ (Temperatura inicial do dispositivo += 1°C)
+\item $\ast$$\ast$\char`\"{}\+Living Room\char`\"{}$\ast$$\ast$ (Temperatura inicial do dispositivo -\/= 1°C)
+\item $\ast$$\ast$\char`\"{}\+Office\char`\"{}$\ast$$\ast$ (Temperatura inicial do dispositivo += 0°C)
+\item $\ast$$\ast$\char`\"{}\+Amphitheater\char`\"{}$\ast$$\ast$ (Temperatura inicial do dispositivo += 2°C)
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md8}{}\doxysubsection{Temperature Control System}\label{md_README_autotoc_md8}
+\hypertarget{md_README_autotoc_md9}{}\doxysubsubsection{D\+I\+S\+P\+L\+A\+Y\+:}\label{md_README_autotoc_md9}
+
+\begin{DoxyItemize}
+\item {\bfseries{Current Temperature}} (indica o valor atual da temperatura medido pelo sensor)
+\item {\bfseries{Operation Mode}} (Indica o modo escolhido pelo utilizador) 
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md10}{}\doxysubsubsection{O\+P\+E\+R\+A\+T\+I\+O\+N M\+O\+D\+E\+S\+:}\label{md_README_autotoc_md10}
+
+\begin{DoxyItemize}
+\item {\bfseries{Choose Temperature}} (Utilizador escolhe a temperatura que deseja na divisão)
+\item {\bfseries{Auto Regulate}} (Utilizador escolhe regular a temperatura da divisão para a ideal (= 23°C))
+\item {\bfseries{Increase 1°C}} (Utilizador escolhe aumentar 1°C à temperatura atual da divisão)
+\item {\bfseries{Decrease 1°C}} (Utilizador escolhe diminuir 1°C à temperatura atual da divisão)
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md11}{}\doxysection{🗃️ Diagramas}\label{md_README_autotoc_md11}
+\hypertarget{md_README_autotoc_md12}{}\doxysubsection{Diagrama do dispositivo de Regulação de temperatura (ar condicionado)}\label{md_README_autotoc_md12}
+\hypertarget{md_README_autotoc_md13}{}\doxysubsection{Diagrama do sistema de controlo}\label{md_README_autotoc_md13}
+\hypertarget{md_README_autotoc_md14}{}\doxysection{🛠️ Demonstração}\label{md_README_autotoc_md14}
+\hypertarget{md_README_autotoc_md15}{}\doxysubsubsection{Exemplo de demonstração do sistema}\label{md_README_autotoc_md15}
+O utilizador escolheu\+:
+\begin{DoxyItemize}
+\item Temperatura exterior\+: Frio
+\item Altura do dia\+: Noite
+\item Divisão\+: Sala Sendo assim, a temperatura inicial do espaço onde será colocado o dispositivo de regulação de temperatura é de 14°C (cenário mais frio de todos os possíveis)
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+\DoxyCodeLine{|-\/-\/-\/-\/ Configuration Environment -\/-\/-\/-\/|}
+\DoxyCodeLine{|-\/      Exterior Temperature:      -\/| }
+\DoxyCodeLine{|              Cold                 |}
+\DoxyCodeLine{|-\/          Time of Day:           -\/| }
+\DoxyCodeLine{|              Night                |}
+\DoxyCodeLine{|-\/         Room Division:          -\/| }
+\DoxyCodeLine{|           Living Room             |}
+\DoxyCodeLine{|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|}
+\DoxyCodeLine{}
+\DoxyCodeLine{Inicial System Temperature: 14.0°C}
+\end{DoxyCode}
+
+
+De seguida, o utilizador escolhe o modo \char`\"{}$\ast$$\ast$\+Regulação Automática$\ast$$\ast$\char`\"{}. Sendo assim, o controlador de temperatura é ativado para atingir a temperatura desejada.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{===    Mode Auto Regulate (23.0°C)   ===}
+\DoxyCodeLine{=     Desired Temperature: 23.00°C     =}
+\DoxyCodeLine{=     Current Temperature: 14.04°C     =}
+\DoxyCodeLine{=       Temperature increasing...      =}
+\DoxyCodeLine{=       Controller Error: 6.362        =}
+\DoxyCodeLine{}
+\DoxyCodeLine{(...)}
+\DoxyCodeLine{}
+\DoxyCodeLine{=     Desired Temperature: 23.00°C     =}
+\DoxyCodeLine{=     Current Temperature: 25.87°C     =}
+\DoxyCodeLine{=       Temperature decreasing...      =}
+\DoxyCodeLine{=       Controller Error: -\/0.405       =}
+\DoxyCodeLine{}
+\DoxyCodeLine{(...)}
+\DoxyCodeLine{}
+\DoxyCodeLine{=     Desired Temperature: 23.00°C     =}
+\DoxyCodeLine{=     Current Temperature: 23.00°C     =}
+\DoxyCodeLine{=          Temperature stable.         =}
+\DoxyCodeLine{=       Controller Error: -\/0.001       =}
+\end{DoxyCode}
+
+
+Desta forma, após escolhido o modo de operação e, por sua vez, uma nova temperatura desejada (neste caso maior do que a atual), podemos observar as seguintes fases\+:
+
+{\bfseries{1}}-\/ O controlador começa a aumentar a temperatura
+
+{\bfseries{2}}-\/ Quando atinge uma temperatura superior à desejada, começa a diminuir a temperatura, de forma a estabilizar na temperatura desejada
+
+{\bfseries{3}}-\/ Estabilizou e mantém a temperatura desejada pelo utilizador \hypertarget{md_README_autotoc_md16}{}\doxysection{✒️ Autor}\label{md_README_autotoc_md16}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/GuilhermeCajeira}{\texttt{ @\+Guilherme\+Cajeira}} 
+\end{DoxyItemize}

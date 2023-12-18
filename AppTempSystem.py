@@ -10,9 +10,6 @@ class ConfigDialog(QDialog):
     def __init__(self, parent=None):
         """
         Initializes the configuration dialog window.
-
-        Args:
-            parent (QWidget, optional): The parent widget. Defaults to None.
         """
         super(ConfigDialog, self).__init__(parent)
         self.setWindowTitle("Configuration Menu")
