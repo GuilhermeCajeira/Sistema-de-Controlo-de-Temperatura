@@ -1,7 +1,8 @@
 
-# Título do Projeto
+# Sistema de controlo de temperatura
 
-Uma breve descrição sobre o que esse projeto faz e para quem ele é
+Simula um sistema composto por um sensor de temperatura, um dispositivo de regulação de temperatura 
+ambiente (ar condicionado) e um algoritmo de controlo, incluido num cenário configurado pelo utilizador.
 
 
 ## 🔧 Pré-requisitos de Instalação
@@ -23,11 +24,15 @@ python3 AppTempSystem.py
 Este comando permite iniciar o sistema de controlo de temperatura.
 ## 📦 Funcionalidades
 
-Após executar o código, antes de iniciar o sistema de regulação de temperatura, é pedido ao utilizador para configurar o ambiente da divisão onde este será colocado. 
+Após executar o código, antes de iniciar o sistema de regulação de temperatura, é pedido ao utilizador
+para configurar o ambiente da divisão onde este será colocado. 
 
-O menu de configuração, consoante o ambiente escolhido, configura a temperatura inicial do dispositivo de regulação de temperatura, simulando a temperatura inicial que está nessa divisão.
+O menu de configuração, consoante o ambiente escolhido, configura a temperatura inicial do dispositivo 
+de regulação de temperatura, simulando a temperatura inicial que está nessa divisão.
 
-Após essa configuração, o sistema inicia. A cada segundo é atualizado o valor medido pelo sensor de temperatura e apresentado no display (**Current Temperature**), bem como o modo de operação escolhido (**Operation Mode**)
+Após essa configuração, o sistema inicia. A cada segundo é atualizado o valor medido pelo sensor de 
+temperatura e apresentado no display (**Current Temperature**), bem como o modo de operação escolhido 
+(**Operation Mode**)
 
 ### Configuration Menu
 #### Exterior Temperature:
@@ -64,7 +69,8 @@ O utilizador escolheu:
 - Temperatura exterior: Frio
 - Altura do dia: Noite
 - Divisão: Sala
-Sendo assim, a temperatura inicial do espaço onde será colocado o dispositivo de regulação de temperatura é de 14°C (cenário mais frio de todos os possíveis)
+Sendo assim, a temperatura inicial do espaço onde será colocado o dispositivo de regulação de temperatura 
+é de 14°C (cenário mais frio de todos os possíveis)
 
 
 ```
@@ -81,7 +87,8 @@ _____________________________________
 Inicial System Temperature: 14.0°C
 ```
 
-De seguida, o utilizador escolhe o modo "**Regulação Automática**". Sendo assim, o controlador de temperatura é ativado para atingir a temperatura desejada.
+De seguida, o utilizador escolhe o modo "**Regulação Automática**". Sendo assim, o controlador de temperatura 
+é ativado para atingir a temperatura desejada.
 
 ```
 ===    Mode Auto Regulate (23.0°C)   ===
@@ -105,11 +112,13 @@ De seguida, o utilizador escolhe o modo "**Regulação Automática**". Sendo ass
 =       Controller Error: -0.001       =
 ```
 
-Desta forma, após escolhido o modo de operação e, por sua vez, uma nova temperatura desejada (neste caso maior do que a atual), podemos observar as seguintes fases:
+Desta forma, após escolhido o modo de operação e, por sua vez, uma nova temperatura desejada (neste caso maior 
+do que a atual), podemos observar as seguintes fases:
 
 **1**- O controlador começa a aumentar a temperatura
 
-**2**- Quando atinge uma temperatura superior à desejada, começa a diminuir a temperatura, de forma a estabilizar na temperatura desejada
+**2**- Quando atinge uma temperatura superior à desejada, começa a diminuir a temperatura, de forma a estabilizar 
+na temperatura desejada
 
 **3**- Estabilizou e mantém a temperatura desejada pelo utilizador
 ## ✒️ Autor
