@@ -62,6 +62,13 @@ temperatura e apresentado no display (**Current Temperature**), bem como o modo 
 - **Decrease 1°C** (Utilizador escolhe diminuir 1°C à temperatura atual da divisão)
 
 
+## 🗃️ Diagramas
+### Diagrama do dispositivo de Regulação de temperatura (ar condicionado)
+![Sistema de Controlo de Temperatura](https://github.com/GuilhermeCajeira/Sistema-de-Controlo-de-Temperatura/assets/94262079/575cbad2-24c4-4641-bc57-d882206e2010)
+
+
+
+
 ## 🛠️ Demonstração
 #### Exemplo de demonstração do sistema
 
