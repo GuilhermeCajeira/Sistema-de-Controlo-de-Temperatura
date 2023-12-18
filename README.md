@@ -66,7 +66,8 @@ temperatura e apresentado no display (**Current Temperature**), bem como o modo 
 ### Diagrama do dispositivo de Regulação de temperatura (ar condicionado)
 ![Sistema de Controlo de Temperatura](https://github.com/GuilhermeCajeira/Sistema-de-Controlo-de-Temperatura/assets/94262079/575cbad2-24c4-4641-bc57-d882206e2010)
 
-
+### Diagrama do sistema de controlo
+![Control System](https://github.com/GuilhermeCajeira/Sistema-de-Controlo-de-Temperatura/assets/94262079/052d2671-817a-44df-bbd7-a08e75863530)
 
 
 ## 🛠️ Demonstração
