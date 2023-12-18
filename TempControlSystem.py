@@ -1,100 +1,80 @@
 import random
 
+from PrintSystem import *
 
 class TemperatureSensor:
     def __init__(self):
-        self.current_temperature = 20.0
-        self.temperature_variation = 0.0
+         # Initializes temperature sensor with an initial temperature and no variation
+        self.current_temperature = 22
+        self.temperature_variation = 0
 
     def read_temperature(self):
-        # Adiciona a variação causada pelo controlador ao valor atual da temperatura
+        # Adds the variation caused by the controller to the current temperature
         self.current_temperature += self.temperature_variation
-
-        # Simula uma leitura real do sensor
-        variation = random.uniform(-0.1, 0.1)
-        self.current_temperature += variation
-
+        
         return self.current_temperature
 
     def set_temperature_variation(self, variation):
-        # Define a variação de temperatura causada pelo controlador
+        # Sets the temperature variation caused by the controller
         self.temperature_variation = variation
 
 
 class PIDController:
     def __init__(self, setpoint):
+        # Initializes PID controller with constants and variables
         self.setpoint = setpoint
-        self.Kp = 0.5  # Constante proporcional
-        self.Ki = 0.2  # Constante integral
-        self.Kd = 0.01 # Constante derivativa
+        self.Kp = 0.5  # Proportional constant
+        self.Ki = 0.2  # Integral constant
+        self.Kd = 0.01 # Derivative constant
         self.prev_error = 0.0
         self.integral = 0.0
+        self.derivative = 0.0
 
-    def update(self, current_temperature):
+    def updatePID(self, current_temperature):
+        # Updates PID controller based on current temperature and setpoint
         error = self.setpoint - current_temperature
-        print(error)
 
         self.integral += error
-        derivative = error - self.prev_error
+        self.derivative = error - self.prev_error
 
-        output = self.Kp * error + self.Ki * self.integral + self.Kd * derivative
+        self.PIDoutput = self.Kp * error + self.Ki * self.integral + self.Kd * self.derivative
 
-        print(output)
         self.prev_error = error
-
-        return output
 
 
 class TemperatureController:
     def __init__(self, temperature_sensor):
-        self.desired_temperature = 25.0
+        # Initializes temperature controller
+        self.desired_temperature = None
         self.pid_controller = PIDController(self.desired_temperature)
         self.temperature_sensor = temperature_sensor
         self.controller_active = False
 
     def activate_controller(self, desired_temperature):
+        # Activates temperature controller with the desired temperature
         self.desired_temperature = desired_temperature
         self.pid_controller.setpoint = desired_temperature
         self.controller_active = True
 
-    def adjust_temperature(self):
-        if self.controller_active:
-            current_temperature = self.temperature_sensor.read_temperature()
-            pid_output = self.pid_controller.update(current_temperature)
+    def update_temperature(self):
+        # Update the temperature based on the PID controller's output
+        self.current_temperature = self.temperature_sensor.read_temperature()
+        
+        if self.controller_active:      # If the controller is active
+            self.pid_controller.updatePID(self.current_temperature)
 
-            if pid_output > 0:
-                print("Temperature increasing...")
-            elif pid_output < 0:
-                print("Temperature decreasing...")
-            else:
-                print("Temperature stable.")
+            # Prints PID controller output and current temperature information
+            print_PIDoutput(self.pid_controller, self.current_temperature, self.desired_temperature)
 
-            # Ajustar a temperatura da sala com base na saída do PID
-            self.temperature_sensor.set_temperature_variation(pid_output)
+            # Adjusts the room temperature based on the PID output
+            self.temperature_sensor.set_temperature_variation(self.pid_controller.PIDoutput)            
+        else:                           # If the controller is disabled
+            # Simulates a real temperature sensor reading with variation
+            variation = random.uniform(-0.1, 0.1)
 
-            if abs(current_temperature - self.desired_temperature) < 0.1:
-                print("Temperature reached the setpoint!")
+            self.temperature_sensor.set_temperature_variation(variation)
 
-            
-
-    def set_desired_temperature(self, new_target):
-        self.desired_temperature = new_target
-        self.pid_controller.setpoint = new_target
-
-    def auto_regulate_temperature(self):
-        # self.heating = False
-        # self.cooling = False
-        self.controller_active = False
-
-    def heat_room(self):
-        # self.heating = True
-        # self.cooling = False
-        self.controller_active = False
-
-    def cool_room(self):
-        # self.heating = False
-        # self.cooling = True
-        self.controller_active = False
+        
 
 
 
